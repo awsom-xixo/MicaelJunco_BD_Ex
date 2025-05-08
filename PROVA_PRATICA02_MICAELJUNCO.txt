@@ -1,0 +1,63 @@
+PROVA PRÁTICA 02, 29/04/2025
+MICAEL JEFERSON JUNCO
+
+EXER 001:
+SELECT
+COUNT(motivo) as total_consultas_dor_no_peito
+FROM consulta
+WHERE motivo = 'Dor no Peito';
+
+EXER 002:
+SELECT
+p.nome,c.data_consulta,c.horario_consulta, m.nome as 'Doutor'
+FROM paciente as p JOIN consulta as c
+	ON p.id = c.id_paciente
+JOIN medico as m ON m.id = c.id_medico
+WHERE m.nome = 'Dr. João Silva';
+
+EXER 003:
+SELECT
+cons.nome, cons.endereco, cons.responsavel
+FROM consultorio as cons
+WHERE cons.endereco LIKE '%São Paulo';
+
+EXER 004:
+Infelizmente faltei a aula em que foi citado o comando "BETWEEN" - estava de atestado -, então fiz de uma maneira alternativa.
+SELECT
+con.data_consulta as 'Dia Consulta',
+con.horario_consulta as 'Horario',
+med.nome as 'Medico',
+pac.nome as 'Paciente'
+FROM consulta as con JOIN medico as med 
+  ON med.id = con.id_medico
+JOIN paciente as pac ON pac.id = con.id_paciente
+WHERE con.data_consulta >= '2023-10-1' AND con.data_consulta < '2023-11-01';
+
+EXER 005:
+SELECT
+med.nome, COUNT(con.id) as total_consultas
+FROM medico as med JOIN consulta as con
+ON med.id = con.id_medico
+GROUP BY(con.id);
+
+EXER 006:
+SELECT
+nome, especialidade, data_contratacao
+FROM medico
+WHERE data_contratacao < '2018-01-01';
+
+EXER 007:
+SELECT
+med.nome as 'medico', pac.nome as 'paciente', consul.nome as 'consultorio', con.data_consulta, con.horario_consulta
+FROM medico as med JOIN consulta as con
+  ON med.id = con.id_medico
+JOIN paciente as pac
+  ON pac.id = con.id_paciente
+JOIN consultorio as consul
+  ON consul.id = con.id_consultorio;
+
+EXER 008:
+SELECT DISTINCT
+nome, capacidade
+FROM consultorio
+WHERE capacidade > 10;
